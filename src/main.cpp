@@ -61,7 +61,13 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    window = glfwCreateWindow(640, 480, "OpenGL", glfwGetPrimaryMonitor(), NULL);
+#ifdef DEBUG
+    GLFWmonitor* moniton = NULL;
+#endif
+#ifndef DEBUG
+    GLFWmonitor* moniton = glfwGetPrimaryMonitor()
+#endif
+    window = glfwCreateWindow(640, 480, "OpenGL", moniton, NULL);
     if (!window)
     {
         glfwTerminate();
